@@ -13,6 +13,6 @@ var vm=new Vue({
        
    },
    mounted:function() {
-       
+       alert("")
    }
 });
