@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet"  href="/dist/semantic.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+<body>
+    <div id="app" v-cloak class="main ui container">
+       <template v-if='list.length'>
+          <div class="ui checkbox">
+              <input type="checkbox" v-model="checked"  @click='checkall' />
+              <label>全选</label>
+            </div>
+        <table class="ui celled table">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>选择</th>
+               <th>商品名称</th>
+              <th>商品单价</th>
+              <th>购买数量</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+            <tbody>
+              <tr  v-for="(item,index) in list">
+                
+                <td>{{index+1}}</td>
+                <td>
+                    <div class="ui checkbox">
+                        <input type="checkbox" @click="checkItem(index)" v-model='item.checked' name="example">
+                        <label></label>
+                      </div>
+                </td>
+                <td>{{item.name}}</td>
+                <td>{{item.price}}</td>
+                <td>
+                    <button class="ui primary basic button" @click='handleReduce(index)'>-</button>
+                  {{item.count}}
+                  <button class="ui primary basic button" @click='handleAdd(index)'>+</button>
+                </td>
+                <td>
+                    <button class="ui primary basic button" @click="handleRemove(index)">Delete</button>
+
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr><th colspan="5">
+                总价:{{totalPrice}}
+                </th>
+              </th>
+            </tr></tfoot>
+          </table>
+
+    </template>
+       <div v-else>
+            购物车为空
+       </div>
+    </div>
+    <script src='index.js'></script>
+</body>
+</html>
