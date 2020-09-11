@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="myapp">
+        <input type="button" :value="count"  v-on:click='greet'>
+        <div>{{count}}</div>
+    </div>
+</body>
+</html>
+<script>
+    var vm=new Vue({
+        el:'#myapp',
+        data:function(){
+            return {
+              count:0
+            }
+        },
+        methods:{
+            greet:function(){
+                this.count++;
+            }
+        }
+    });
+</script>

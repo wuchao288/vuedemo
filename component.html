@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="components-demo">
+        <button-counter v-bind:bcount.sync="couinfo"></button-counter>
+        <button-counter v-bind:bcount.sync="couinfo"></button-counter>
+        <button-counter v-bind:bcount.sync="couinfo"></button-counter>
+
+        <base-checkbox v-model="lovingVue"></base-checkbox>
+        {{lovingVue}}
+      </div>
+    <script>
+        var comt=Vue.component('button-counter',{
+            props: ['bcount'],
+            template:'<button v-on:click="bcount.count++">You clicked me {{bcount.count}} times.</button>'
+        })
+        Vue.component('base-checkbox', {
+            model: {
+                prop: 'checked',
+                event: 'change'
+            },
+            props: {
+                checked: Boolean
+            },
+            methods: {
+                change:function(info){
+                    console.info(info);
+                }  
+            },
+            template: `
+                <input
+                type="checkbox"
+                v-bind:checked="checked"
+                v-on:change="$emit('change', $event.target.checked)"
+                >
+              `
+            })
+        var vm=new Vue({
+            el:'#components-demo',
+            data:function(){
+                return {
+                    lovingVue:true,
+                    couinfo:{
+
+                        count:0  
+                    }
+                   
+                }
+            },
+            methods: {
+                change:function(bd){
+                    alert(bd);
+                }
+            },  
+        });
+    </script>
+</body>
+</html>
